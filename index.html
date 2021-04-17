@@ -1,0 +1,317 @@
+<!DOCTYPE HTML>
+<!--
+     ____ _  __ __  __ __ __ ____
+    /  _// |/ // / / // //_// __ \
+   _/ / /    // /_/ // ,<  / /_/ /
+  /___//_/|_/ \____//_/|_| \____/
+
+-->
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="format-detection" content="telphone=no,email=no">
+    <meta name="keywords" content="如何通过Fiddler4抓取易班app电子请假条数据？萌宅猫,易班,易班电子请假条,技术工具,">
+    <meta name="description" itemprop="description" content="早在之前的时候就尝试过通过抓包抓取某平台预约自习室座位，但是没有成功，这不正好有了尝试的机会。原因就是如今因为疫情，大部分请假都实现了电子化，减少了人员之间的交流，如今疫情慢慢的褪去，也正好咱们一起来看看这个请假条的代码是怎么样的！  首先，咱们必须先得按照Fiddler4软件，网上很好找，下面放一个官方网址  下载地址：https://www.telerik.com/download/fiddler  &nbsp;  下载好了之后呢，">
+    <link rel="icon" type="image/x-icon" href="http://185.161.70.247/wp-content/uploads/2020/11/u13556793743615821171fm26gp0.jpg">
+    <title>如何通过Fiddler4抓取易班app电子请假条数据？ - 萌宅猫</title>
+    <meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='stylesheet' id='wp-block-library-css'  href='http://www.xiaocaitou.buzz/wp-includes/css/dist/block-library/style.min.css?ver=5.7.1' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawe-css'  href='https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.4/static/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='kratos-css'  href='http://www.xiaocaitou.buzz/wp-content/themes/kratos-pjax-master/static/css/kratos.min.css?ver=0.4.4' type='text/css' media='all' />
+<link rel='shortlink' href='http://www.xiaocaitou.buzz/?p=106' />
+<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.4/static/js/jquery.min.js?ver=2.1.4' id='theme-jq-js'></script>
+    <style>#offcanvas-menu{background:rgba(42,42,42,.9)}.affix{top:61px}.kratos-cover.kratos-cover_2{background-image:url(https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.4/static/images/background.jpg)}@media(max-width:768px){.kratos-cover.kratos-cover_2{background-image:url(http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/2.jpg)}}@media(max-width:768px){#kratos-header-section{display:none}nav#offcanvas-menu{top:0;padding-top:40px}.kratos-cover .desc.desc2{margin-top:-55px}}    </style>
+  </head>
+        <body >
+        <div id="kratos-wrapper">
+            <div id="kratos-page">
+                <div id="kratos-header">
+                                        <div class="nav-toggle"><a class="kratos-nav-toggle js-kratos-nav-toggle"><i></i></a></div>
+                                        <header id="kratos-header-section">
+                        <div class="container">
+                            <div class="nav-header">
+                                                                <nav id="kratos-menu-wrap" class="menu-menu-1-container"><ul id="kratos-primary-menu" class="sf-menu"><li><a href="http://185.161.70.247/"><i class="fa fa-home"></i> 首页</a></li>
+<li><a href="http://185.161.70.247/wp-login.php"><i class="fa fa-user-circle-o"></i> 登录</a></li>
+<li><a href="http://www.xiaocaitou.buzz/index.php/article.html/"><i class="fa fa-tablet"></i> 文章</a>
+<ul class="sub-menu">
+	<li><a href="http://www.xiaocaitou.buzz/index.php/category/bbbbb/">闲聊</a></li>
+	<li class="current-post-ancestor current-menu-parent"><a href="http://www.xiaocaitou.buzz/index.php/category/fucking/">技术工具</a></li>
+	<li><a href="http://www.xiaocaitou.buzz/index.php/category/cao/">技术交流</a></li>
+</ul>
+</li>
+<li><a href="http://www.xiaocaitou.buzz/index.php/goodsite.html/"><i class="fa fa-mars"></i> 实用网址</a></li>
+<li><a href="http://www.xiaocaitou.buzz/index.php/about.html/"><i class="fa fa-paper-plane"></i> 关于</a></li>
+</ul></nav>                            </div>
+                        </div>
+                    </header>
+                </div>
+                                <div class="kratos-start kratos-hero-2">
+                    <div class="kratos-overlay"></div>
+                    <div class="kratos-cover kratos-cover_2 text-center">
+                        <div class="desc desc2 animate-box">
+                            <a href="http://www.xiaocaitou.buzz"><h2>萌宅猫</h2><br><span>I'm very vegetable and very poor.</span></a>
+                        </div>
+                    </div>
+                </div>
+                                <div id="kratos-blog-post" style="background:#f5f5f5">    <div id="container" class="container">
+        <div class="row">
+        <section id="main" class='col-md-8'>
+        <article>
+        <div class="kratos-hentry kratos-post-inner clearfix">
+            <header class="kratos-entry-header">
+                <h1 class="kratos-entry-title text-center">如何通过Fiddler4抓取易班app电子请假条数据？</h1>
+                <div class="kratos-post-meta text-center">
+                    <span>
+                    <i class="fa fa-calendar"></i> 2021年4月18日                    <i class="fa fa-commenting-o"></i> 0条评论                    <i class="fa fa-eye"></i> 29次阅读  
+                    <span class="hd">
+                    <i class="fa fa-thumbs-o-up"></i> 0人点赞                    <i class="fa fa-user"></i> caitou                    </span>
+                    </span>
+                </div>
+            </header>
+            <div class="kratos-post-content">
+            <p>早在之前的时候就尝试过通过抓包抓取某平台预约自习室座位，但是没有成功，这不正好有了尝试的机会。原因就是如今因为疫情，大部分请假都实现了电子化，减少了人员之间的交流，如今疫情慢慢的褪去，也正好咱们一起来看看这个请假条的代码是怎么样的！</p>
+<p>首先，咱们必须先得按照Fiddler4软件，网上很好找，下面放一个官方网址</p>
+<p>下载地址：<a href="https://www.telerik.com/download/fiddler" target="_blank"  rel="nofollow" >https://www.telerik.com/download/fiddler</a><img loading="lazy" class="aligncenter size-full wp-image-107" src="http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/QQ图片20210417224807.png" alt="" width="1303" height="579" /></p>
+<p>&nbsp;</p>
+<p>下载好了之后呢，我们进行安装，就可以到下一步，设置了，因为是抓手机app的包，所以要对在同一个局域网络下的两个设备（电脑和手机）进行一些简单的测试。</p>
+<p>打开fiddler点击里面的工具，然后点击选项，其中https和connection分别按照如下填入</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-108" src="http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/QQ截图20210417230728.png" alt="" width="1085" height="669" /> <img loading="lazy" class="aligncenter size-full wp-image-109" src="http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/QQ截图20210417230742.png" alt="" width="558" height="376" /></p>
+<p>保持手机跟电脑在同一个局域网内，打开手机的无线设置选择手动代理，在主机名里面填入你网络的ipv4地址，端口填8888（上图窗口所示）然后点击确认<img loading="lazy" class="aligncenter size-full wp-image-110" src="http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/QQ图片20210417231116.jpg" alt="" width="1080" height="1355" /></p>
+<p>ipv4地址可以使用电脑的CMD命令行输入ipconfig回车进行确认。</p>
+<p><img loading="lazy" class="aligncenter wp-image-111 size-full" src="http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/QQ截图20210417231338.png" alt="" width="993" height="519" /></p>
+<p>一切都设置好之后呢，我们就可以打开手机app进行抓包了，有请我们的受害者，某易班！不过易班在抓取的时候容易连不上网，可以在我转载的另外一篇<a href="http://www.xiaocaitou.buzz/index.php/2021/04/17/zhuabao/">文章</a>里面找到解决方案。</p>
+<p>终于，在咱们的努力下抓取了一个页面：<a href="http://yiban.gxnu.edu.cn/yzdx/home" target="_blank"  rel="nofollow" >yiban.gxnu.edu.cn/yzdx/home</a></p>
+<p>当然还有包括其他的一些js和css文件</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-112" src="http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/QQ截图20210417232317.png" alt="" width="1085" height="669" /></p>
+<p>我们查看这个域名就可以知道，网络直接访问了域名下yzdx文件夹里面的home文件，咱们在浏览器里面输入这个域名进行查看</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-113" src="http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/QQ截图20210417232602.png" alt="" width="508" height="637" /></p>
+<p>大功告成，一个需要登录的页面展示在咱们面前，现在咱们只需要登录下自己已经通过了请假条的账号然后把整个页面扒拉下来就行了。在某个js文件里面有一行代码是要进行api密匙验证，把这行代码删除掉就不会出现error:network error显示</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-114" src="http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/QQ截图20210418002840.png" alt="" width="414" height="623" /></p>
+<p>最后的成果如下：<a href="http://zhoubenchuang.github.io/yzdx/index.html" target="_blank"  rel="nofollow" >zhoubenchuang.github.io/yzdx/index.html</a></p>
+<p>这个页面使用github pages搭建而成，如何搭建可以看这篇<a href="http://www.xiaocaitou.buzz/index.php/2021/04/15/githubpages/">文章</a>，只可惜是个静态页面，功能受到了限制，为了保险起见我封装了一个app版本</p>
+<p>app版本下载：<a class="downbtn downcloud" href="https://wwr.lanzous.com/i1Q8mo47syh" target="_blank"><i class="fa fa-cloud-download"></i> 云盘下载</a></p>
+<p>密码:2333</p>
+<p>当然这些都只是一些小儿科，只是为了玩一下而已，学习计算机知识还需要走很多的路，我也只不过是在使用CV大法罢了，后续的更加完善的app版本看能力跟心情啦！</p>
+<p>生活不易，下方可微信打赏 <img src="https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.4/static/images/smilies/guai.png" alt=":guai:" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180102%2Fc7b3692460b24217b71d3e628e492eb7.jpeg&amp;refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1621269435&amp;t=2c72752e3b6965298e634e6c54c86b25" /></p>
+            </div>
+                        <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+                        <footer class="kratos-entry-footer clearfix">
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                <a href="javascript:;" class="Donate"><i class="fa fa-bitcoin"></i> 打赏</a>                   <a href="javascript:;" id="btn" data-action="love" data-id="106" class="Love"><i class="fa fa-thumbs-o-up"></i> 点赞</a>
+                <a href="javascript:;" class="Share"><i class="fa fa-share-alt"></i> 分享</a><div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain twitter" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" data-url="http://www.xiaocaitou.buzz/index.php/2021/04/18/yiban/"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+    function share(obj){
+        var qqShareURL="http://connect.qq.com/widget/shareqq/index.html?";
+        var weiboShareURL="http://service.weibo.com/share/share.php?";
+        var qzoneShareURL="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+        var facebookShareURL="https://www.facebook.com/sharer/sharer.php?";
+        var twitterShareURL="https://twitter.com/intent/tweet?";
+        var host_url="http://www.xiaocaitou.buzz/index.php/2021/04/18/yiban/";
+        var title='%E3%80%90%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87Fiddler4%E6%8A%93%E5%8F%96%E6%98%93%E7%8F%ADapp%E7%94%B5%E5%AD%90%E8%AF%B7%E5%81%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%9F%E3%80%91';
+        var qqtitle='%E3%80%90%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87Fiddler4%E6%8A%93%E5%8F%96%E6%98%93%E7%8F%ADapp%E7%94%B5%E5%AD%90%E8%AF%B7%E5%81%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%9F%E3%80%91';
+        var excerpt='%E6%97%A9%E5%9C%A8%E4%B9%8B%E5%89%8D%E7%9A%84%E6%97%B6%E5%80%99%E5%B0%B1%E5%B0%9D%E8%AF%95%E8%BF%87%E9%80%9A%E8%BF%87%E6%8A%93%E5%8C%85%E6%8A%93%E5%8F%96%E6%9F%90%E5%B9%B3%E5%8F%B0%E9%A2%84%E7%BA%A6%E8%87%AA%E4%B9%A0%E5%AE%A4%E5%BA%A7%E4%BD%8D%EF%BC%8C%E4%BD%86%E6%98%AF%E6%B2%A1%E6%9C%89%E6%88%90%E5%8A%9F%EF%BC%8C%E8%BF%99%E4%B8%8D%E6%AD%A3%E5%A5%BD%E6%9C%89%E4%BA%86%E5%B0%9D%E8%AF%95%E7%9A%84%E6%9C%BA%E4%BC%9A%E3%80%82%E5%8E%9F%E5%9B%A0%E5%B0%B1%E6%98%AF%E5%A6%82%E4%BB%8A%E5%9B%A0%E4%B8%BA%E7%96%AB%E6%83%85%EF%BC%8C%E5%A4%A7%E9%83%A8%E5%88%86%E8%AF%B7%E5%81%87%E9%83%BD%E5%AE%9E%E7%8E%B0%E4%BA%86%E7%94%B5%E5%AD%90%E5%8C%96%EF%BC%8C%E5%87%8F%E5%B0%91%E4%BA%86%E4%BA%BA%E5%91%98%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BA%A4%E6%B5%81%EF%BC%8C%E5%A6%82%E4%BB%8A%E7%96%AB%E6%83%85%E6%85%A2%E6%85%A2%E7%9A%84%E8%A4%AA%E5%8E%BB%EF%BC%8C%E4%B9%9F%E6%AD%A3%E5%A5%BD%E5%92%B1%E4%BB%AC%E4%B8%80%E8%B5%B7%E6%9D%A5%E7%9C%8B%E7%9C%8B%E8%BF%99%E4%B8%AA%E8%AF%B7%E5%81%87%E6%9D%A1%E7%9A%84%E4%BB%A3%E7%A0%81%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%81%20%E9%A6%96%E5%85%88%EF%BC%8C%E5%92%B1%E4%BB%AC%E5%BF%85%E9%A1%BB%E5%85%88%E5%BE%97%E6%8C%89%E7%85%A7Fiddler4%E8%BD%AF%E4%BB%B6%EF%BC%8C%E7%BD%91%E4%B8%8A%E5%BE%88%E5%A5%BD%E6%89%BE%EF%BC%8C%E4%B8%8B%E9%9D%A2%E6%94%BE%E4%B8%80%E4%B8%AA%E5%AE%98%E6%96%B9%E7%BD%91%E5%9D%80%20%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80%EF%BC%9Ahttps%3A%2F%2Fww%E2%80%A6%E2%80%A6';
+        var wbexcerpt='%E6%97%A9%E5%9C%A8%E4%B9%8B%E5%89%8D%E7%9A%84%E6%97%B6%E5%80%99%E5%B0%B1%E5%B0%9D%E8%AF%95%E8%BF%87%E9%80%9A%E8%BF%87%E6%8A%93%E5%8C%85%E6%8A%93%E5%8F%96%E6%9F%90%E5%B9%B3%E5%8F%B0%E9%A2%84%E7%BA%A6%E8%87%AA%E4%B9%A0%E5%AE%A4%E5%BA%A7%E4%BD%8D%EF%BC%8C%E4%BD%86%E6%98%AF%E6%B2%A1%E6%9C%89%E6%88%90%E5%8A%9F%EF%BC%8C%E8%BF%99%E4%B8%8D%E6%AD%A3%E5%A5%BD%E6%9C%89%E4%BA%86%E5%B0%9D%E8%AF%95%E7%9A%84%E6%9C%BA%E4%BC%9A%E3%80%82%E5%8E%9F%E5%9B%A0%E5%B0%B1%E6%98%AF%E5%A6%82%E4%BB%8A%E5%9B%A0%E4%B8%BA%E7%96%AB%E6%83%85%EF%BC%8C%E5%A4%A7%E9%83%A8%E5%88%86%E8%AF%B7%E5%81%87%E9%83%BD%E5%AE%9E%E7%8E%B0%E4%BA%86%E7%94%B5%E5%AD%90%E5%8C%96%EF%BC%8C%E5%87%8F%E5%B0%91%E4%BA%86%E4%BA%BA%E5%91%98%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BA%A4%E6%B5%81%EF%BC%8C%E5%A6%82%E4%BB%8A%E7%96%AB%E6%83%85%E6%85%A2%E6%85%A2%E7%9A%84%E8%A4%AA%E5%8E%BB%EF%BC%8C%E4%B9%9F%E6%AD%A3%E5%A5%BD%E5%92%B1%E4%BB%AC%E4%B8%80%E8%B5%B7%E6%9D%A5%E7%9C%8B%E7%9C%8B%E8%BF%99%E4%B8%AA%E8%AF%B7%E5%81%87%E6%9D%A1%E7%9A%84%E4%BB%A3%E7%A0%81%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%81%20%E9%A6%96%E5%85%88%EF%BC%8C%E5%92%B1%E4%BB%AC%E5%BF%85%E9%A1%BB%E5%85%88%E5%BE%97%E6%8C%89%E7%85%A7Fiddler4%E8%BD%AF%E4%BB%B6%EF%BC%8C%E7%BD%91%E4%B8%8A%E5%BE%88%E5%A5%BD%E6%89%BE%EF%BC%8C%E4%B8%8B%E9%9D%A2%E6%94%BE%E4%B8%80%E4%B8%AA%E5%AE%98%E6%96%B9%E7%BD%91%E5%9D%80%20%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80%EF%BC%9Ahttps%3A%2F%2Fww%E2%80%A6%E2%80%A6';
+        var pic="http://www.xiaocaitou.buzz/wp-content/uploads/2021/04/QQ图片20210417224807.png";
+        var _URL;
+        if(obj=="qq"){
+            _URL=qqShareURL+"url="+host_url+"&title="+qqtitle+"&pics="+pic+"&desc=&summary="+excerpt+"&site=vtrois";
+        }else if(obj=="weibo"){
+            _URL=weiboShareURL+"url="+host_url+"&title="+title+wbexcerpt+"&pic="+pic;
+        }else if(obj=="qzone"){
+            _URL=qzoneShareURL+"url="+host_url+"&title="+qqtitle+"&pics="+pic+"&desc=&summary="+excerpt+"&site=vtrois";
+        }else if(obj=="facebook"){
+             _URL=facebookShareURL+"u="+host_url;
+        }else if(obj=="twitter"){
+             _URL=twitterShareURL+"text="+title+excerpt+"&url="+host_url;
+        }
+        window.open(_URL);
+    }
+    </script>
+</div>                </div>
+                <div class="footer-tag clearfix">
+                    <div class="pull-left">
+                    <i class="fa fa-tags"></i>
+                    <a href="http://www.xiaocaitou.buzz/index.php/tag/%e6%98%93%e7%8f%ad/" rel="tag">易班</a> <a href="http://www.xiaocaitou.buzz/index.php/tag/%e6%98%93%e7%8f%ad%e7%94%b5%e5%ad%90%e8%af%b7%e5%81%87%e6%9d%a1/" rel="tag">易班电子请假条</a>                    </div>
+                    <div class="pull-date">
+                    <span>最后编辑：2021年4月18日</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <nav class="navigation post-navigation clearfix" role="navigation">
+                        <div class="nav-previous clearfix">
+                <a title="通过抓包工具抓包APP就连不上网的解决方案？" href="http://www.xiaocaitou.buzz/index.php/2021/04/17/zhuabao/">&lt; 上一篇</a>
+            </div>
+                    </nav>
+        <div id="comments" class="comments-area">
+    <ol class="comment-list">
+    </ol>	<div id="respond" class="comment-respond">
+		<h4 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/index.php/2021/04/18/yiban/#respond" style="display:none;">取消回复</a></small></h4><form action="http://www.xiaocaitou.buzz/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes">电子邮件地址不会被公开。必填项已用 * 标注</p><div class="comment form-group has-feedback"><div class="input-group"><textarea class="form-control" id="comment" placeholder="|´・ω・)ノ还不快点说点什么呀poi~" name="comment" rows="5" aria-required="true" required  onkeydown="if(event.ctrlKey){if(event.keyCode==13){document.getElementById('submit').click();return false}};"></textarea></div><div class="OwO"></div></div><div class="comment-form-author form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-user"></i></div><input class="form-control" placeholder="昵称" id="author" name="author" type="text" value="" size="30" /><span class="form-control-feedback required">*</span></div></div>
+<div class="comment-form-email form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-envelope-o"></i></div><input class="form-control" placeholder="邮箱" id="email" name="email" type="text" value="" size="30" /><span class="form-control-feedback required">*</span></div></div>
+<div class="comment-form-url form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-key"></i></div><input class="form-control" placeholder="人机验证：5 ＋ 5 = ?" id="code" name="code" type="text" value="" autocomplete="off" size="30" /><span class="form-control-feedback required">*</span><input type="hidden" name="co_num1" value="6" /><input type="hidden" name="co_num2" value="7" /></div></div>
+<div class="comment-form-url form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-link"></i></div><input class="form-control" placeholder="网站" id="url" name="url" type="text" value="" size="30" /></div></div>
+
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="btn btn-primary" value="发表评论" /> <input type='hidden' name='comment_post_ID' value='106' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="63"/></p></form>	</div><!-- #respond -->
+	</div>    </article>
+    </section>
+    <aside id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm scrollspy">
+        <div id="sidebar" class="affix-top">
+            <aside id="kratos_about-2" class="widget widget_kratos_about clearfix">        <div class="photo-background">
+            <div class="photo-background" style="background:url(http://www.xiaocaitou.buzz/wp-content/themes/kratos-pjax-master/static/images/about.jpg) no-repeat center center;-webkit-background-size:cover;background-size:cover"></div>
+        </div>
+                <div class="photo-wrapper clearfix">
+            <div class="photo-wrapper-tip text-center">
+                <a href="http://www.xiaocaitou.buzz/wp-login.php?redirect_to=http%3A%2F%2Fwww.xiaocaitou.buzz%2Findex.php%2F2021%2F04%2F18%2Fyiban%2F" rel="nofollow"><img class="about-photo" src="http://185.161.70.247/wp-content/uploads/2020/11/u13556793743615821171fm26gp0.jpg" alt=""/></a>
+            </div>
+        </div>
+        <div class="textwidget">
+            <p class="text-center">一个穷鬼</p>
+        </div></aside>        <aside class="widget widget_kratos_poststab">
+            <ul id="tabul" class="nav nav-tabs nav-justified visible-lg">
+                <li class="active"><span href="#newest" data-toggle="tab">最新文章</span></li>
+                <li><span href="#hot" data-toggle="tab">热点文章</span></li>
+                <li><span href="#rand" data-toggle="tab">随机文章</span></li>
+            </ul>
+            <ul id="tabul" class="nav nav-tabs nav-justified visible-md">
+                <li class="active"><span href="#newest" data-toggle="tab">最新</span></li>
+                <li><span href="#hot" data-toggle="tab">热点</span></li>
+                <li><span href="#rand" data-toggle="tab">随机</span></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="newest">
+                    <ul class="list-group">
+                                                    <a class="list-group-item visible-lg" title="如何通过Fiddler4抓取易班app电子请假条数据？" href="http://www.xiaocaitou.buzz/index.php/2021/04/18/yiban/" rel="bookmark"><i class="fa  fa-book"></i> 如何通过Fiddler4抓取易班app电子请假条数据？                            </a>
+                            <a class="list-group-item visible-md" title="如何通过Fiddler4抓取易班app电子请假条数据？" href="http://www.xiaocaitou.buzz/index.php/2021/04/18/yiban/" rel="bookmark"><i class="fa  fa-book"></i> 如何通过Fiddler4抓取易班app电子请假条数据？                            </a>
+                                                    <a class="list-group-item visible-lg" title="通过抓包工具抓包APP就连不上网的解决方案？" href="http://www.xiaocaitou.buzz/index.php/2021/04/17/zhuabao/" rel="bookmark"><i class="fa  fa-book"></i> 通过抓包工具抓包APP就连不上网的解决方案？                            </a>
+                            <a class="list-group-item visible-md" title="通过抓包工具抓包APP就连不上网的解决方案？" href="http://www.xiaocaitou.buzz/index.php/2021/04/17/zhuabao/" rel="bookmark"><i class="fa  fa-book"></i> 通过抓包工具抓包APP就连不上网的解决方案？                            </a>
+                                                    <a class="list-group-item visible-lg" title="如何在Github Pages搭建自己写的html页面？" href="http://www.xiaocaitou.buzz/index.php/2021/04/15/githubpages/" rel="bookmark"><i class="fa  fa-book"></i> 如何在Github Pages搭建自己写的html页面？                            </a>
+                            <a class="list-group-item visible-md" title="如何在Github Pages搭建自己写的html页面？" href="http://www.xiaocaitou.buzz/index.php/2021/04/15/githubpages/" rel="bookmark"><i class="fa  fa-book"></i> 如何在Github Pages搭建自己写的html页面？                            </a>
+                                                    <a class="list-group-item visible-lg" title="B区21-22年396院校汇总" href="http://www.xiaocaitou.buzz/index.php/2021/02/27/396/" rel="bookmark"><i class="fa  fa-book"></i> B区21-22年396院校汇总                            </a>
+                            <a class="list-group-item visible-md" title="B区21-22年396院校汇总" href="http://www.xiaocaitou.buzz/index.php/2021/02/27/396/" rel="bookmark"><i class="fa  fa-book"></i> B区21-22年396院校汇总                            </a>
+                                                    <a class="list-group-item visible-lg" title="向前跑！" href="http://www.xiaocaitou.buzz/index.php/2021/02/25/youmadeit/" rel="bookmark"><i class="fa  fa-book"></i> 向前跑！                            </a>
+                            <a class="list-group-item visible-md" title="向前跑！" href="http://www.xiaocaitou.buzz/index.php/2021/02/25/youmadeit/" rel="bookmark"><i class="fa  fa-book"></i> 向前跑！                            </a>
+                                            </ul>
+                </div>
+                <div class="tab-pane fade" id="hot">
+                    <ul class="list-group">
+                        <a class="list-group-item visible-lg" title="向前跑！" href="http://www.xiaocaitou.buzz/index.php/2021/02/25/youmadeit/" rel="bookmark"><i class="fa  fa-book"></i> 向前跑！</a><a class="list-group-item visible-md" title="向前跑！" href="http://www.xiaocaitou.buzz/index.php/2021/02/25/youmadeit/" rel="bookmark"><i class="fa  fa-book"></i> 向前跑！</a><a class="list-group-item visible-lg" title="Hello,World!" href="http://www.xiaocaitou.buzz/index.php/2020/11/02/hello-world/" rel="bookmark"><i class="fa  fa-book"></i> Hello,World!</a><a class="list-group-item visible-md" title="Hello,World!" href="http://www.xiaocaitou.buzz/index.php/2020/11/02/hello-world/" rel="bookmark"><i class="fa  fa-book"></i> Hello,World!</a><a class="list-group-item visible-lg" title="桂林，一个在冬天依然如春一般的城市" href="http://www.xiaocaitou.buzz/index.php/2020/11/08/guilin/" rel="bookmark"><i class="fa  fa-book"></i> 桂林，一个在冬天依然如春一般的城市</a><a class="list-group-item visible-md" title="桂林，一个在冬天依然如春一般的城市" href="http://www.xiaocaitou.buzz/index.php/2020/11/08/guilin/" rel="bookmark"><i class="fa  fa-book"></i> 桂林，一个在冬天依然如春一般的城市</a><a class="list-group-item visible-lg" title="考研二战怪谈！" href="http://www.xiaocaitou.buzz/index.php/2020/11/09/godblessyou/" rel="bookmark"><i class="fa  fa-book"></i> 考研二战怪谈！</a><a class="list-group-item visible-md" title="考研二战怪谈！" href="http://www.xiaocaitou.buzz/index.php/2020/11/09/godblessyou/" rel="bookmark"><i class="fa  fa-book"></i> 考研二战怪谈！</a><a class="list-group-item visible-lg" title="我的快乐大事记！" href="http://www.xiaocaitou.buzz/index.php/2020/11/13/happydaytime/" rel="bookmark"><i class="fa  fa-book"></i> 我的快乐大事记！</a><a class="list-group-item visible-md" title="我的快乐大事记！" href="http://www.xiaocaitou.buzz/index.php/2020/11/13/happydaytime/" rel="bookmark"><i class="fa  fa-book"></i> 我的快乐大事记！</a>                    </ul>
+                </div>
+                <div class="tab-pane fade" id="rand">
+                    <ul class="list-group">
+                                                    <a class="list-group-item visible-lg" title="如何在Github Pages搭建自己写的html页面？" href="http://www.xiaocaitou.buzz/index.php/2021/04/15/githubpages/" rel="bookmark"><i class="fa  fa-book"></i> 如何在Github Pages搭建自己写的html页面？                            </a>
+                            <a class="list-group-item visible-md" title="如何在Github Pages搭建自己写的html页面？" href="http://www.xiaocaitou.buzz/index.php/2021/04/15/githubpages/" rel="bookmark"><i class="fa  fa-book"></i> 如何在Github Pages搭建自己写的html页面？                            </a>
+                                                    <a class="list-group-item visible-lg" title="如何通过Fiddler4抓取易班app电子请假条数据？" href="http://www.xiaocaitou.buzz/index.php/2021/04/18/yiban/" rel="bookmark"><i class="fa  fa-book"></i> 如何通过Fiddler4抓取易班app电子请假条数据？                            </a>
+                            <a class="list-group-item visible-md" title="如何通过Fiddler4抓取易班app电子请假条数据？" href="http://www.xiaocaitou.buzz/index.php/2021/04/18/yiban/" rel="bookmark"><i class="fa  fa-book"></i> 如何通过Fiddler4抓取易班app电子请假条数据？                            </a>
+                                                    <a class="list-group-item visible-lg" title="考研二战怪谈！" href="http://www.xiaocaitou.buzz/index.php/2020/11/09/godblessyou/" rel="bookmark"><i class="fa  fa-book"></i> 考研二战怪谈！                            </a>
+                            <a class="list-group-item visible-md" title="考研二战怪谈！" href="http://www.xiaocaitou.buzz/index.php/2020/11/09/godblessyou/" rel="bookmark"><i class="fa  fa-book"></i> 考研二战怪谈！                            </a>
+                                                    <a class="list-group-item visible-lg" title="桂林，一个在冬天依然如春一般的城市" href="http://www.xiaocaitou.buzz/index.php/2020/11/08/guilin/" rel="bookmark"><i class="fa  fa-book"></i> 桂林，一个在冬天依然如春一般的城市                            </a>
+                            <a class="list-group-item visible-md" title="桂林，一个在冬天依然如春一般的城市" href="http://www.xiaocaitou.buzz/index.php/2020/11/08/guilin/" rel="bookmark"><i class="fa  fa-book"></i> 桂林，一个在冬天依然如春一般的城市                            </a>
+                                                    <a class="list-group-item visible-lg" title="Hello,World!" href="http://www.xiaocaitou.buzz/index.php/2020/11/02/hello-world/" rel="bookmark"><i class="fa  fa-book"></i> Hello,World!                            </a>
+                            <a class="list-group-item visible-md" title="Hello,World!" href="http://www.xiaocaitou.buzz/index.php/2020/11/02/hello-world/" rel="bookmark"><i class="fa  fa-book"></i> Hello,World!                            </a>
+                                            </ul>
+                </div>
+            </div>
+        </aside><aside id="kratos_comments-2" class="widget widget_kratos_comments clearfix"><h4 class="widget-title">最近评论</h4><div class="recentcomments"><li class="comment-listitem"><div class="comment-user"><span class="comment-avatar"><img alt='caitou' src='http://185.161.70.247/wp-content/uploads/2020/11/caitou_avatar-50x50.jpg' class='avatar avatar-50 photo' height='50' width='50' /></span><div class="comment-author" title="caitou">caitou</div><span class="comment-date">1 个月前 (03月07日)</span></div><div class="comment-content-link"><a href="http://www.xiaocaitou.buzz/index.php/2021/02/25/youmadeit/#comment-9"><div class="comment-content">加油啊！！！caitou！！！</div></a></div></li><li class="comment-listitem"><div class="comment-user"><span class="comment-avatar"><img alt='caitou' src='http://185.161.70.247/wp-content/uploads/2020/11/caitou_avatar-50x50.jpg' class='avatar avatar-50 photo' height='50' width='50' /></span><div class="comment-author" title="caitou">caitou</div><span class="comment-date">1 个月前 (03月05日)</span></div><div class="comment-content-link"><a href="http://www.xiaocaitou.buzz/index.php/2021/02/25/youmadeit/#comment-8"><div class="comment-content">希望今年可以成功上岸，坚持初心啊！！</div></a></div></li><li class="comment-listitem"><div class="comment-user"><span class="comment-avatar"><img alt='caitou' src='http://185.161.70.247/wp-content/uploads/2020/11/caitou_avatar-50x50.jpg' class='avatar avatar-50 photo' height='50' width='50' /></span><div class="comment-author" title="caitou">caitou</div><span class="comment-date">2 个月前 (02月27日)</span></div><div class="comment-content-link"><a href="http://www.xiaocaitou.buzz/index.php/2021/02/25/youmadeit/#comment-7"><div class="comment-content">今天开始准备调剂信息收集，都挣扎两年了，&hellip;</div></a></div></li><li class="comment-listitem"><div class="comment-user"><span class="comment-avatar"><img alt='caitou' src='http://185.161.70.247/wp-content/uploads/2020/11/caitou_avatar-50x50.jpg' class='avatar avatar-50 photo' height='50' width='50' /></span><div class="comment-author" title="caitou">caitou</div><span class="comment-date">2 个月前 (02月26日)</span></div><div class="comment-content-link"><a href="http://www.xiaocaitou.buzz/index.php/2021/02/25/youmadeit/#comment-6"><div class="comment-content">中午12:25分查询到了成绩，总分348&hellip;</div></a></div></li><li class="comment-listitem"><div class="comment-user"><span class="comment-avatar"><img alt='caitou' src='http://185.161.70.247/wp-content/uploads/2020/11/caitou_avatar-50x50.jpg' class='avatar avatar-50 photo' height='50' width='50' /></span><div class="comment-author" title="caitou">caitou</div><span class="comment-date">2 个月前 (02月25日)</span></div><div class="comment-content-link"><a href="http://www.xiaocaitou.buzz/index.php/2021/02/25/youmadeit/#comment-5"><div class="comment-content">每次看到大家考很高分，非常优秀就感觉自己&hellip;</div></a></div></li></div></aside>        </div>
+    </aside>
+        </div>    </div>
+</div>
+                <footer>
+                    <div id="footer" style="background:rgba(35,40,45,1)">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                                    <p class="kratos-social-icons">                                    </p>
+                                    <p> © 2021 <a href="http://www.xiaocaitou.buzz">萌宅猫</a>. All Rights Reserved. | 已在风雨中度过 <span id="span_dt_dt">Loading...</span><br>Theme <a href="https://moedog.org/787.html" target="_blank" rel="nofollow">Kratos</a> Made by <a href="https://www.vtrois.com" target="_blank" rel="nofollow">Vtrois</a> Modified by <a href="https://moedog.org" target="_blank" rel="nofollow">Moedog</a> | <a href="http://www.xiaocaitou.buzz/sitemap.html" target="_blank">Sitemap</a>                                                                        </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cd-tool text-center">
+                            <div class="waifu-btn" title="Waifu"><span class="fa fa-venus"></span></div>                            <div class="gotop-box"><div class="gotop-btn"><span class="fa fa-chevron-up"></span></div></div>
+                                                        <div class="search-box">
+                                <span class="fa fa-search"></span>
+                                <form class="search-form" role="search" method="get" id="searchform" action="http://www.xiaocaitou.buzz/">
+                                    <input type="text" name="s" id="search" placeholder="Search..." style="display:none"/>
+                                </form>
+                            </div>
+                        </div>
+                                                <div class="waifu">
+                            <div class="waifu-tips"></div>
+                            <canvas id="live2d" width="220" height="250" class="live2d"></canvas>
+                            <div class="waifu-tool">
+                                <span class="fa fa-home"></span>
+                                <span class="fa fa-comments"></span>
+                                <span class="fa fa-drivers-license-o"></span>
+                                <span class="fa fa-street-view"></span>
+                                <span class="fa fa-camera"></span>
+                                <span class="fa fa-info-circle"></span>
+                                <span class="fa fa-close"></span>
+                            </div>
+                        </div>
+                                                <div class="aplayer-footer">
+                            <div id="ap-footer" data-json="https://injahow.github.io/meting-api/?id=2904749230" data-autoplay="" data-loop="all" data-order="list"></div>
+                        </div>
+                                                <div class="xb-snow">
+                            <canvas id="Snow" data-count="150" data-dist="100" data-color="255,255,255" data-size="2" data-speed="0.5" data-opacity="0.3" data-step="1"></canvas>
+                        </div>
+                                            </div>
+                </footer>
+            </div>
+        </div>
+        <script type='text/javascript' src='http://www.xiaocaitou.buzz/wp-content/themes/kratos-pjax-master/static/js/theme.min.js?ver=0.4.4' id='theme-js'></script>
+<script type='text/javascript' id='kratos-js-extra'>
+/* <![CDATA[ */
+var xb = {"thome":"http:\/\/www.xiaocaitou.buzz\/wp-content\/themes\/kratos-pjax-master","ctime":"11\/2\/2020 00:00:00","alipay":"","wechat":"http:\/\/www.xiaocaitou.buzz\/wp-content\/uploads\/2021\/04\/QQ\u56fe\u724720210412222500.png","copy":"1","ajax_url":"http:\/\/www.xiaocaitou.buzz\/wp-admin\/admin-ajax.php","order":"asc","owo":"https:\/\/cdn.jsdelivr.net\/gh\/xb2016\/kratos-pjax@0.4.4","site_sh":"61"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.xiaocaitou.buzz/wp-content/themes/kratos-pjax-master/static/js/kratos.js?ver=0.4.4' id='kratos-js'></script>
+<script type='text/javascript' src='http://www.xiaocaitou.buzz/wp-content/themes/kratos-pjax-master/static/js/pjax.js?ver=0.4.4' id='pjax-js'></script>
+<script type='text/javascript' src='http://www.xiaocaitou.buzz/wp-content/themes/kratos-pjax-master/static/js/live2d.js?ver=l2d' id='live2d-js'></script>
+<script type='text/javascript' src='http://www.xiaocaitou.buzz/wp-content/themes/kratos-pjax-master/static/js/waifu-tips.js?ver=1.3' id='waifu-js'></script>
+    </body>
+</html>
